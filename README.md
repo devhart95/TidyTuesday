@@ -1,2 +1,2 @@
 # TidyTuesday
-Devinne Hart TidyTuesday Submissions checking
+Devinne Hart TidyTuesday Submissions
