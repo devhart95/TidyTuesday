@@ -59,7 +59,7 @@ ggplot(race_country, aes(n, month, fill = country)) +
   ggtitle("Ultra Trail Races in Canada & the United States (2012 - 2021)") +
   theme_light() +
   scale_y_discrete(limits = rev) +
-  geom_text(aes(label = n), hjust = -.5) +
+  geom_text(aes(label = n), hjust = -.2) +
   labs(subtitle = 'Count of Ultra Trail Races per Month in the United States & Canada',
        caption = '
        Data: International Trail Running Association (ITRA) 
