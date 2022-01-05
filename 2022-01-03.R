@@ -8,6 +8,8 @@ library('dplyr')
 library('tidyverse')
 library('lubridate')
 
+###Knowing an ultra trail runner on an (indirectly) personal level, when are their races held during the year?###
+
 ###Load in data###
 ultra_rankings <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/ultra_rankings.csv')
 race <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-10-26/race.csv')
@@ -30,9 +32,11 @@ race_country$country <- replace(race_country$country, race_country$country == 'F
 race_country$country <- replace(race_country$country, race_country$country == 'PA, United States', 'United States')
 race_country$country <- replace(race_country$country, race_country$country == 'Myoko, Japan', 'Japan')
 
+###Just include US & Canada###
 race_country <- race_country %>%
   filter(country == 'United States' | country == 'Canada')
 
+###Grab counts per country & month###
 race_country <- race_country %>% count(country, month)
 
 
@@ -45,11 +49,7 @@ race_country$month <- factor(race_country$month, levels = c('January',
                              'February', 'March', 'April', 'May', 'June',
                              'July', 'August', 'September', 'October', 'November', 'December'))
 
-###Add in color palette###
-cbp1 <- c("#999999", "#E69F00", "#56B4E9", "#009E73",
-          "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
-
-###Counts per month per country###
+###Counts per month per country bar chart###
 ggplot(race_country, aes(n, month, fill = country)) +
   geom_col(show.legend = FALSE) +
   facet_wrap(vars(country), scales = 'free_y') +
